@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pb.apps.cms.dao.extend.CategoryExtendMapper">
+  <select id="findAll"  resultMap="allArticleExtend">
+    SELECT *
+    FROM cms_category
+  </select>
+<resultMap
+          id="allArticleExtend"
+          type="com.pb.apps.cms.bean.extend.CategoryExtend"
+          extends="com.pb.apps.cms.dao.CategoryMapper.BaseResultMap">
+    <association
+            property="category"
+            column="parent_id"
+            select="com.pb.apps.cms.dao.CategoryMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  
+</mapper>
