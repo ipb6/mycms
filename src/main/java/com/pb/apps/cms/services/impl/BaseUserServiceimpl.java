@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.pb.apps.cms.bean.BaseUser;
+import com.pb.apps.cms.bean.BaseUserExample;
 import com.pb.apps.cms.bean.UserRole;
 import com.pb.apps.cms.bean.UserRoleExample;
 import com.pb.apps.cms.bean.extend.BaseUserExtend;
@@ -15,7 +16,9 @@ import com.pb.apps.cms.dao.BaseUserMapper;
 import com.pb.apps.cms.dao.UserRoleMapper;
 import com.pb.apps.cms.dao.extend.BaseUserExtendMapper;
 import com.pb.apps.cms.services.IBaseUserService;
+import com.pb.apps.cms.utils.CustomerException;
 import com.pb.apps.cms.vm.BaseRoleVm;
+import com.pb.apps.cms.vm.UserVM;
 
 /**
 
@@ -81,12 +84,12 @@ public class BaseUserServiceimpl implements IBaseUserService{
 		List<Long> oldlist = new ArrayList<>();
 		//将没有的角色删除
 		for (UserRole userRole : userRoles) {
-			if(newlist.contains(userRole.getRoleId())) {
+			oldlist.add(userRole.getRoleId());
+			if(!newlist.contains(userRole.getRoleId())) {
 				userRoleMApper.deleteByPrimaryKey(userRole.getId());
-			}else {
-				oldlist.add(userRole.getRoleId());
 			}
 		}
+		
 		//将新的角色插入数据库
 		for (Long role : newlist) {
 			if(!oldlist.contains(role)) {
@@ -96,6 +99,24 @@ public class BaseUserServiceimpl implements IBaseUserService{
 				userRoleMApper.insert(userRole);	
 			}
 		}	
+	}
+
+	@Override
+	public BaseUser login(UserVM userVM) {
+		// TODO Auto-generated method stub
+		String username = userVM.getUsername();
+		BaseUserExample bue = new BaseUserExample();
+		bue.createCriteria().andUsernameEqualTo(username);
+		List<BaseUser> selectByExample = baseUserMapper.selectByExample(bue);
+		
+		if(selectByExample.size()==0) {
+		 	throw new CustomerException("该用户不存在");
+		}
+		BaseUser baseUser = selectByExample.get(0);
+		if(!(baseUser.getPassword().equals(userVM.getPassword()))) {
+			throw new CustomerException("密码错误");
+		}
+		return baseUser;
 	}
 
 }

@@ -14,6 +14,7 @@ import java.util.List;
 import com.pb.apps.cms.bean.BaseUser;
 import com.pb.apps.cms.bean.extend.BaseUserExtend;
 import com.pb.apps.cms.vm.BaseRoleVm;
+import com.pb.apps.cms.vm.UserVM;
 
 public interface IBaseUserService {
 	
@@ -31,5 +32,7 @@ public interface IBaseUserService {
 
 	//给用户设置角色
 	void setRoles(BaseRoleVm uservm);
+
+	BaseUser login(UserVM userVM);
 	
 }

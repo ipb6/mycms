@@ -3,6 +3,8 @@ package com.pb.apps.cms.services;
 import java.util.List;
 
 import com.pb.apps.cms.bean.BaseRole;
+import com.pb.apps.cms.bean.extend.BaseRoleExtend;
+import com.pb.apps.cms.vm.BasePrivilegeVm;
 
 /**
 
@@ -15,5 +17,10 @@ import com.pb.apps.cms.bean.BaseRole;
 */
 
 public interface IBaseRoleService {
+	
 	List<BaseRole> findAll();
+	
+	List<BaseRoleExtend> findAllWithPrivilege();
+
+	void authorization(BasePrivilegeVm basePrivilege);
 }

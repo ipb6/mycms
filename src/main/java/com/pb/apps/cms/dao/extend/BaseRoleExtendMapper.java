@@ -1,6 +1,9 @@
 package com.pb.apps.cms.dao.extend;
 
+import java.util.List;
+
 import com.pb.apps.cms.bean.BaseRole;
+import com.pb.apps.cms.bean.extend.BaseRoleExtend;
 
 /**
 
@@ -13,4 +16,6 @@ import com.pb.apps.cms.bean.BaseRole;
 */
 public interface BaseRoleExtendMapper {
 	public BaseRole selectByUserId(long id);
+	
+	public List<BaseRoleExtend> findAllWithPrivilege();
 }

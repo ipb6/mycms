@@ -1,6 +1,7 @@
 package com.pb.apps.cms.web.controller;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class UserController {
     @Autowired
     private IBaseUserService baseUserService;
 
+
     @PostMapping("login")
     public Message login(@RequestBody UserVM userVM){
         // 3. 如果登录失败
@@ -56,6 +58,5 @@ public class UserController {
         // 1. 登录， token从缓存中移除掉
         return MessageUtil.success("退出成功");
     }
-
 
 }

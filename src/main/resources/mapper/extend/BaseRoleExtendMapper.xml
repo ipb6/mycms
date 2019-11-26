@@ -10,10 +10,24 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
+  
+  
+   <resultMap id="findAllWithPrivilegeResultMap" 
+   type="com.pb.apps.cms.bean.extend.BaseRoleExtend"
+   extends="com.pb.apps.cms.dao.BaseRoleMapper.BaseResultMap"
+   >
+  	<collection property="privileges"
+  	 column="id" 
+  	 select="com.pb.apps.cms.dao.extend.BasePrivilegeExtendMapper.findByRoleId"></collection>
+  </resultMap>
   <select id="selectByUserId"  resultMap="selectByUserIdResultMap">
   	select br.* 
   	from base_user_role bur,base_role br
   	where br.id=bur.role_id
   	and bur.user_id=#{id,jdbcType=BIGINT}
+  </select>
+  <select id="findAllWithPrivilege"  resultMap="findAllWithPrivilegeResultMap">
+  	select *
+  	from base_role
   </select>
 </mapper>

@@ -26,7 +26,7 @@ public class CategoryController {
 	@Autowired
 	private ICategoryService ics;
 	
-	//新增或更新
+	
 	@ApiOperation("新增或更新")
 	@PostMapping("addOrSaveCategory")
 	public Message addCategory(Category category) {
@@ -35,7 +35,7 @@ public class CategoryController {
 		return MessageUtil.success("添加成功");
 	}
 	
-	//根据id删除
+	
 	@ApiOperation("根据id删除")
 	@GetMapping("deleteCategoryById")
 	public Message deleteCategoryById(int id) {
@@ -43,7 +43,7 @@ public class CategoryController {
 		return MessageUtil.success("删除成功");
 	}
 	
-	//批量删除
+	
 	@ApiOperation("批量删除")
 	@PostMapping("deleteBatchCategory")
 	public Message deleteBatchCategory(@RequestBody Long[] ids) {
@@ -52,7 +52,6 @@ public class CategoryController {
 		return MessageUtil.success("删除成功");
 	}
 	
-	//更新
 	@ApiOperation("更新")
 	@GetMapping("updateCategory")
 	public Message updateCategory(Category category) {
@@ -60,7 +59,6 @@ public class CategoryController {
 		return MessageUtil.success("更新成功");
 	}
 	
-	//查找所有
 	@ApiOperation("查找所有")
 	@GetMapping("findAllCategory")
 	public Message findAllCategory() {
@@ -68,7 +66,6 @@ public class CategoryController {
 		return MessageUtil.success(findAllCategory);
 	}
 	
-	//查找所有（包含父项）
 	@ApiOperation("查找所有（包含父项）")
 	@GetMapping("findAll")
 	public Message findAll() {
